@@ -23,13 +23,13 @@ Este proyecto es un chat en tiempo real creado con Node.js y Socket.io. Permite 
 1. Clona este repositorio en tu máquina local:
 
 ```bash
-git clone https://github.com/diegolopez-dev/chat-node-socketio.git
+git clone https://github.com/diegolopez-dev/chat.git
 ```
 
 2. Instalar las dependencias del proyecto:
 
 ```bash
-cd chat-node-socketio
+cd chat
 npm install
 ```
 
@@ -38,7 +38,7 @@ npm install
 1. Inicia el servidor de Node.js:
 
 ```bash
-node server.js
+npm run dev
 ```
 
 2. Abre tu navegador y accede a `http://localhost:3000`.
