@@ -58,7 +58,6 @@ io.on("connection", async (socket) => {
   });
 
   if (!socket.recovered) {
-    // <- recuperase los mensajes sin conexión
     try {
       const results = await db.execute({
         sql: "SELECT id, content, user FROM messages WHERE id > ?",
