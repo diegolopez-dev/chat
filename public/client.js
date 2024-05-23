@@ -7,11 +7,11 @@ const getUsername = async () => {
     return username;
   }
 
-  // const res = await fetch('https://randomuser.me/api/?results=2');
-  // const { username: randomUsername } = await res.json();
+  const res = await fetch('https://randomuser.me/api/?results=2');
+  const { username: randomUsername } = await res.json();
 
-  localStorage.setItem("username", username);
-  return username;
+  localStorage.setItem("username", randomUsername);
+  return randomUsername;
 };
 
 const socket = io({

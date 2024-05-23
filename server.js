@@ -6,7 +6,6 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { Server } from "socket.io";
 import { createServer } from "node:http";
-import Swal from 'sweetalert2'
 
 dotenv.config();
 
@@ -20,16 +19,6 @@ const io = new Server(server, {
 });
 
 app.use(express.static(path.join(__dirname, 'public')))
-
-Swal.fire({
-  title: "Ingrese su Nombre",
-  input: "text",
-  inputAttributes: {
-    autocapitalize: "on",
-  },
-  showCancelButton: false,
-  confirmButtonText: "Ingesar",
-})
 
 const db = createClient({
   url: "libsql://open-mole-man-diegolopez-dev.turso.io",
@@ -53,12 +42,7 @@ io.on("connection", async (socket) => {
 
   socket.on("chat message", async (msg) => {
     let result;
-    //const username = socket.handshake.auth.username ?? "anonymous";
-    username.textContent = result.value;
-    nameUser = result.value;
-    socket.emit("userConnection", {
-      user: result.value,
-    });
+    const username = socket.handshake.auth.username ?? "anonymous";
     console.log({ username });
     try {
       result = await db.execute({
