@@ -31,12 +31,6 @@ Swal.fire({
   confirmButtonText: "Ingesar",
 })
 
-username.textContent = result.value;
-  nameUser = result.value;
-  socket.emit("userConnection", {
-    user: result.value,
-  });
-
 const db = createClient({
   url: "libsql://open-mole-man-diegolopez-dev.turso.io",
   authToken: process.env.DB_TOKEN,
