@@ -1,34 +1,39 @@
 import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const messages = document.getElementById("messages");
+const nameInput = document.getElementById('name-input')
+
 const getUsername = async () => {
-  const username = localStorage.getItem("username");
-  if (username) {
-    console.log(`User existed ${username}`);
-    return username;
-  }
+  // const username = localStorage.getItem("username");
+  // if (username) {
+  //   console.log(`User existed ${username}`);
+  //   return username;
+  // }
 
-  const res = await fetch('https://randomuser.me/api/?results=10');
-  const { username: randomUsername } = await res.json();
+  // const res = await fetch('https://randomuser.me/api/?results=10');
+  // const { username: randomUsername } = await res.json();
 
-  localStorage.setItem("username", randomUsername);
-  return randomUsername;
+  // localStorage.setItem("username", randomUsername);
+  // return randomUsername;
+
+  const username = nameInput.value;
+  console.log(username)
+  return username;
 };
 
 const socket = io({
   auth: {
-    username: await getUsername(),
+    username: getUsername(),
     serverOffset: 0,
   },
 });
 
-const form = document.getElementById("form");
-const input = document.getElementById("input");
-const messages = document.getElementById("messages");
-
-socket.on("chat message", (msg, serverOffset, username) => {
+socket.on("chat message", (msg, serverOffset) => {
   const item = `<li>
         <p>${msg}</p>
-        <small>${username}</small>
+        <small>${socket.auth.username}</small>
       </li>`;
   messages.insertAdjacentHTML("beforeend", item);
   socket.auth.serverOffset = serverOffset;
