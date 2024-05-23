@@ -1,35 +1,14 @@
 import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
-import Swal from 'sweetalert2'
-
-Swal.fire({
-  title: "Ingrese su Nombre",
-  input: "text",
-  inputAttributes: {
-    autocapitalize: "on",
-  },
-  showCancelButton: false,
-  confirmButtonText: "Ingesar",
-}).then((result) => {
-  username.textContent = result.value;
-  nameUser = result.value;
-  socket.emit("userConnection", {
-    user: result.value,
-  });
-});
 
 const getUsername = async () => {
-  // const username = localStorage.getItem("username");
-  // if (username) {
-  //   console.log(`User existed ${username}`);
-  //   return username;
-  // }
+  const username = localStorage.getItem("username");
+  if (username) {
+    console.log(`User existed ${username}`);
+    return username;
+  }
 
   // const res = await fetch('https://randomuser.me/api/?results=2');
   // const { username: randomUsername } = await res.json();
-
-  // localStorage.setItem("username", randomUsername);
-  // return randomUsername;
-  const username = await res.json();
 
   localStorage.setItem("username", username);
   return username;

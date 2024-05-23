@@ -6,6 +6,7 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { Server } from "socket.io";
 import { createServer } from "node:http";
+import Swal from 'sweetalert2'
 
 dotenv.config();
 
@@ -19,6 +20,22 @@ const io = new Server(server, {
 });
 
 app.use(express.static(path.join(__dirname, 'public')))
+
+Swal.fire({
+  title: "Ingrese su Nombre",
+  input: "text",
+  inputAttributes: {
+    autocapitalize: "on",
+  },
+  showCancelButton: false,
+  confirmButtonText: "Ingesar",
+}).then((result) => {
+  username.textContent = result.value;
+  nameUser = result.value;
+  socket.emit("userConnection", {
+    user: result.value,
+  });
+});
 
 const db = createClient({
   url: "libsql://open-mole-man-diegolopez-dev.turso.io",
