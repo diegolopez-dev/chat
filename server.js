@@ -29,13 +29,13 @@ Swal.fire({
   },
   showCancelButton: false,
   confirmButtonText: "Ingesar",
-}).then((result) => {
-  username.textContent = result.value;
+})
+
+username.textContent = result.value;
   nameUser = result.value;
   socket.emit("userConnection", {
     user: result.value,
   });
-});
 
 const db = createClient({
   url: "libsql://open-mole-man-diegolopez-dev.turso.io",
@@ -59,7 +59,12 @@ io.on("connection", async (socket) => {
 
   socket.on("chat message", async (msg) => {
     let result;
-    const username = socket.handshake.auth.username ?? "anonymous";
+    //const username = socket.handshake.auth.username ?? "anonymous";
+    username.textContent = result.value;
+    nameUser = result.value;
+    socket.emit("userConnection", {
+      user: result.value,
+    });
     console.log({ username });
     try {
       result = await db.execute({
