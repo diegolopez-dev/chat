@@ -7,7 +7,7 @@ const getUsername = async () => {
     return username;
   }
 
-  const res = await fetch('https://randomuser.me/api/?results=2');
+  const res = await fetch('https://randomuser.me/api/?results=10');
   const { username: randomUsername } = await res.json();
 
   localStorage.setItem("username", randomUsername);
