@@ -40,10 +40,8 @@ io.on("connection", async (socket) => {
     console.log("Usuario desconectado");
   });
 
-  socket.on("chat message", async (msg) => {
+  socket.on("message", async (msg, username) => {
     let result;
-    const username = socket.handshake.auth.username ?? "anonymous";
-    console.log({ username });
     try {
       result = await db.execute({
         sql: "INSERT INTO messages (content, user) VALUES (:msg, :username)",
@@ -53,7 +51,6 @@ io.on("connection", async (socket) => {
       console.error(e);
       return;
     }
-
     io.emit("chat message", msg, result.lastInsertRowid.toString(), username);
   });
 

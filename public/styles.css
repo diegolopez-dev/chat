@@ -36,12 +36,36 @@ body {
   background-color: #d0eadf;
 }
 
+#name-user {
+  display: flex;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 8px 16px;
+  color: #000000;
+  background-color: #d0eadf;
+}
+
+#name-user > span {
+  color: #000000;
+}
+
+#name {
+  font-family: "Inconsolata", monospace;
+  font-size: 24px;
+  flex-grow: 1;
+  border: none;
+  margin: 0px 12px;
+  outline: none;
+  color: #000000;
+  background-color: #d0eadf;
+}
+
 #messages {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow-y: scroll;
-  height: 100%;
+  height: 92%;
   padding-bottom: 100px; 
   display: flex;
   flex-direction: column;
@@ -49,7 +73,7 @@ body {
   max-width: 520px;
 }
 
-#messages > li {
+/* #messages > li {
   list-style: none;
   padding: 8px 12px;
   margin: 12px;
@@ -60,6 +84,40 @@ body {
   align-self: flex-start;
   background-color: #dcdcc0;
   box-shadow: -2px 2px 4px #bbbcb3;
+} */
+
+#message-left,
+#message-right {
+  list-style: none;
+  padding: 4px 8px;
+  margin: 12px;
+  max-width: 520px;
+  font-size: 20px;
+  word-wrap: break-word;
+  
+}
+
+#message-left {
+  border-radius: 0px 20px 20px 20px;
+  align-self: flex-start;
+  background-color: #dcdcc0;
+  box-shadow: -2px 2px 4px #bbbcb3;
+}
+
+#message-right {
+  border-radius: 20px 0px 20px 20px;
+  align-self: flex-end;
+  background-color: #024452;
+  box-shadow: -2px 2px 4px #bbbcb3;
+  color: #efe7e7;
+}
+
+#message-left > p > span,
+#message-right > p > span {
+  display: block;
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 12px;
 }
 
 #form {

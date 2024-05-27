@@ -3,48 +3,49 @@ import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 const form = document.getElementById("form");
 const input = document.getElementById("input");
 const messages = document.getElementById("messages");
-const nameInput = document.getElementById('name-input')
+const nameInput = document.getElementById("name");
+const messageTone = new Audio('/tone.mp3')
 
-const getUsername = async () => {
-  // const username = localStorage.getItem("username");
-  // if (username) {
-  //   console.log(`User existed ${username}`);
-  //   return username;
-  // }
-
-  // const res = await fetch('https://randomuser.me/api/?results=10');
-  // const { username: randomUsername } = await res.json();
-
-  // localStorage.setItem("username", randomUsername);
-  // return randomUsername;
-
-  const username = nameInput.value;
-  console.log(username)
-  return username;
-};
+nameInput.focus()
 
 const socket = io({
   auth: {
-    username: getUsername(),
+    username: nameInput.value,
+    messages: messages.value,
     serverOffset: 0,
   },
 });
 
-socket.on("chat message", (msg, serverOffset) => {
-  const item = `<li>
-        <p>${msg}</p>
-        <small>${socket.auth.username}</small>
+function sendMessage() {
+  if (input.value && nameInput.value) {
+    socket.emit("message", input.value, nameInput.value)
+    addMessageToUI(true, msg, serverOffset, username)
+  }
+  else {
+    nameInput.focus()
+    alert("Introduce nombre y mensaje")
+  }
+  input.value = "";
+}
+
+function addMessageToUI(isOwnMessage, msg, serverOffset, username) {
+  const item = `
+      <li id="${isOwnMessage ? 'message-right' : 'message-left'}">
+        <p id="message">${msg}</p>
+        <span>${username}</span>
       </li>`;
-  messages.insertAdjacentHTML("beforeend", item);
+  messages.innerHTML += item
   socket.auth.serverOffset = serverOffset;
   messages.scrollTop = messages.scrollHeight;
-});
+  input.value = "";
+}
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  sendMessage()
+});
 
-  if (input.value) {
-    socket.emit("chat message", input.value);
-    input.value = "";
-  }
+socket.on("chat message", (msg, serverOffset, username) => {
+  messageTone.play()
+  addMessageToUI(false, msg, serverOffset, username)
 });
