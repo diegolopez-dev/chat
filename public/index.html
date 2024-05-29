@@ -16,26 +16,28 @@
   <body>
     <section id="chat">
       <h1 id="title">Diego Chat 💬</h1>
-      <div id="name-user">
-        <span><i class="far fa-user"></i></span>
-        <input
-          type="text"
-          id="name"
-          placeholder="Escriba su nombre"
-          maxlength="20"
-          required
-        />
-      </div>
       <ul id="messages"></ul>
       <form id="form">
-        <input
-          type="text"
-          name="message"
-          id="input"
-          placeholder="Escriba su mensaje"
-          autocomplete="off"
-        />
-        <button type="submit">Enviar</button>
+        <div id="name-user">
+          <span><i class="far fa-user"></i></span>
+          <input
+            type="text"
+            id="name"
+            placeholder="Escriba su nombre"
+            maxlength="20"
+            required
+          />
+          </div>
+          <div id="input-message">
+            <input
+              type="text"
+              name="message"
+              id="input"
+              placeholder="Escriba su mensaje"
+              autocomplete="off"
+            />
+            <button id="button" type="submit">Enviar</button>
+        </div>
       </form>
     </section>
   </body>

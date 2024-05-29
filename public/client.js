@@ -17,24 +17,31 @@ const socket = io({
 });
 
 function sendMessage() {
+  const fecha = new Date()
   if (input.value && nameInput.value) {
-    socket.emit("message", input.value, nameInput.value)
+    socket.emit("message", input.value, "Enviado por " + nameInput.value + " a las: " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds())
     addMessageToUI(true, msg, serverOffset, username)
-  }
-  else {
-    nameInput.focus()
-    alert("Introduce nombre y mensaje")
   }
   input.value = "";
 }
 
 function addMessageToUI(isOwnMessage, msg, serverOffset, username) {
-  const item = `
-      <li id="${isOwnMessage ? 'message-right' : 'message-left'}">
+  if (isOwnMessage) {
+    const item = `
+      <li id="message-right">
         <p id="message">${msg}</p>
-        <span>${username}</span>
+        <span id="username">${username}</span>
       </li>`;
-  messages.innerHTML += item
+    messages.innerHTML += item
+  }
+  else {
+    const item = `
+      <li id="message-left">
+        <p id="message">${msg}</p>
+        <span id="username">${username}</span>
+      </li>`;
+    messages.innerHTML += item
+  }
   socket.auth.serverOffset = serverOffset;
   messages.scrollTop = messages.scrollHeight;
   input.value = "";
@@ -46,6 +53,6 @@ form.addEventListener("submit", (e) => {
 });
 
 socket.on("chat message", (msg, serverOffset, username) => {
-  messageTone.play()
   addMessageToUI(false, msg, serverOffset, username)
+  messageTone.play()
 });
