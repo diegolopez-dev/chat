@@ -34,24 +34,18 @@ await db.execute(`
 `);
 
 io.on("connection", async (socket) => {
-  console.log("Usuario conectado");
-
-  socket.on("disconnect", () => {
-    console.log("Usuario desconectado");
-  });
-
-  socket.on("message", async (msg, username) => {
+  socket.on("message", async (content, user) => {
     let result;
     try {
       result = await db.execute({
-        sql: "INSERT INTO messages (content, user) VALUES (:msg, :username)",
-        args: { msg, username },
+        sql: "INSERT INTO messages (content, user) VALUES (:content, :user)",
+        args: { content, user },
       });
     } catch (e) {
       console.error(e);
       return;
     }
-    io.emit("chat message", msg, result.lastInsertRowid.toString(), username);
+    io.emit("chat message", content, result.lastInsertRowid.toString(), user);
   });
 
   if (!socket.recovered) {

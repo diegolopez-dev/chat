@@ -21,7 +21,7 @@ body {
 #chat {
   overflow: hidden;
   max-width: 560px;
-  min-width: 320px ;
+  min-width: 320px;
   height: 100vh;
   position: relative;
   border: 4px solid #00b62a;
@@ -49,21 +49,7 @@ body {
   max-width: 520px;
 }
 
-/* #messages > li {
-  list-style: none;
-  padding: 8px 12px;
-  margin: 12px;
-  max-width: 520px;
-  font-size: 20px;
-  word-wrap: break-word;
-  border-radius: 0px 20px 20px 20px;
-  align-self: flex-start;
-  background-color: #dcdcc0;
-  box-shadow: -2px 2px 4px #bbbcb3;
-} */
-
-#message-left,
-#message-right {
+#message-left {
   list-style: none;
   padding: 4px 8px;
   margin: 12px;
@@ -76,20 +62,12 @@ body {
 #message-left {
   border-radius: 0px 20px 20px 20px;
   align-self: flex-start;
-  background-color: #dcdcc0;
-  box-shadow: -2px 2px 4px #bbbcb3;
-}
-
-#message-right {
-  border-radius: 20px 0px 20px 20px;
-  align-self: flex-end;
   background-color: #024452;
   box-shadow: -2px 2px 4px #bbbcb3;
   color: #efe7e7;
 }
 
-#message-left > p > span,
-#message-right > p > span {
+#message-left > p > span {
   display: block;
   font-style: italic;
   font-size: 12px;
