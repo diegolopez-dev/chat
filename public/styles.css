@@ -135,7 +135,7 @@ body {
   background-color: #d0eadf;
 }
 
-#input {
+#input-message {
   font-size: 18px;
   border-radius: 9999px;
   border: 4px solid #dcdcc0;
@@ -144,7 +144,7 @@ body {
   width: 72%;
 }
 
-#input:focus {
+#input-message:focus {
   outline: 0;
 }
 
@@ -152,9 +152,9 @@ body {
   background: #a0a071;
   color: #ffffff;
   border: 0;
-  padding: 6px;
+  padding: 10px;
   border-radius: 12px;
-  width: 17%;
+  width: 20%;
 }
 
 #button:hover {
