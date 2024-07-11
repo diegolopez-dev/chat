@@ -31,7 +31,7 @@ function addMessageToUI(content, serverOffset, user) {
 function sendMessage() {
   const fecha = new Date()
   if (input.value && nameInput.value) {
-    socket.emit("message", input.value, "Enviado por " + nameInput.value + " el " + fecha.getDate() + "|" + (fecha.getMonth() + 1) + "|" + fecha.getFullYear() + " a las: " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds())
+    socket.emit("message", input.value, nameInput.value + " | " + fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear() + " | " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds())
     addMessageToUI(content, serverOffset, user)
   }
   input.value = "";
